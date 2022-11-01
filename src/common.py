@@ -6,8 +6,8 @@ import usb_midi
 LED_PIN = GP25
 BUTTON_SELECT_LEFT = [GP10, GP9, GP8, GP7, GP11]
 BUTTON_SELECT_RIGHT = [GP21, GP22, GP26, GP27, GP20]
-BUTTON_DATA_A = [GP12, GP14, GP16, GP17]  # L1, L2, R1, R2
-BUTTON_DATA_B = [GP_13, GP_15, GP18, GP19]  # L1, L2, R1, R2
+BUTTON_DATA_A = [GP12, GP14, GP18, GP16]  # L1, L2, R1, R2
+BUTTON_DATA_B = [GP13, GP15, GP19, GP17]  # L1, L2, R1, R2
 
 
 def get_millis():
@@ -103,13 +103,13 @@ def test_peripherals():
                     print("button_changed B[%d:%d] = %d" % (select_index, data_index, state_b))
                     button.state_b = state_b
                     button.timestamp_b = get_millis()
-                if button.state_a and button.state_b:
-                    if button.timestamp_a > button.timestamp_b:
-                        print("button_time[%d:%d] A>B : %d" % (select_index, data_index, button.timestamp_a - button.timestamp_b))
-                    elif button.timestamp_b > button.timestamp_a:
-                        print("button_time[%d:%d] A<B : %d" % (select_index, data_index, button.timestamp_b - button.timestamp_a))
-                    else:
-                        print("button_time[%d:%d] A=B : %d" % (select_index, data_index, 0))
+                    if button.state_a and button.state_b:
+                        if button.timestamp_a > button.timestamp_b:
+                            print("button_time[%d:%d] A>B : %d" % (select_index, data_index, button.timestamp_a - button.timestamp_b))
+                        elif button.timestamp_b > button.timestamp_a:
+                            print("button_time[%d:%d] A<B : %d" % (select_index, data_index, button.timestamp_b - button.timestamp_a))
+                        else:
+                            print("button_time[%d:%d] A=B : %d" % (select_index, data_index, 0))
             select[select_index].set_state(False)
 
 
